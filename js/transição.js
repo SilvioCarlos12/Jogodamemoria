@@ -1,0 +1,1 @@
+var recebendovalorbtn = $("#jogar").val();
