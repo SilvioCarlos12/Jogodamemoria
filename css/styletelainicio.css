@@ -1,6 +1,21 @@
 .contenier {
-    height: 10em;
+    height: 100vh;
+    width: 100vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    align-content: center;
     justify-content: center;
+}
+
+.btn {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.body {
+    margin: 0px;
 }
