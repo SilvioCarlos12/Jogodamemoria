@@ -12,5 +12,3 @@ console.log(manipula);
 //     console.log(manipula[index] + manipula[index]);
 
 // }
-
-$(".item").append("<p> testando </p>");
