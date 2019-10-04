@@ -17,14 +17,12 @@
     padding: 10px;
 }
 
-.col-3 {
+.col-5 {
     border: 2px solid greenyellow;
-    justify-items: center;
 }
 
 .row {
     border: 2px solid red;
-    padding: 10px;
 }
 
 #col {
