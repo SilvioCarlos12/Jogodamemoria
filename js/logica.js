@@ -12,8 +12,7 @@ console.log(manipula);
 //     console.log(manipula[index] + manipula[index]);
 
 // }
-for (let index = 0; index < manipula.length / 2; index++) {
+for (var index = 0; index < manipula.length / 2; index++) {
     $("#linha1").append(`<div class="item" id= "${index}" > <p> ${manipula[index]}</p>   </div>`);
-
 
 }
