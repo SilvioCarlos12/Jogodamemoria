@@ -1,18 +1,16 @@
 .caixa {
-    width: 500px;
-    height: 300px;
+    display: inline-block;
     border: 2px solid black;
 }
 
 .linha {
-    width: 450px;
-    height: 100px;
-    border: 2px solid black;
+    width: 100%;
+    border: 2px solid blue;
 }
 
 .item {
     display: inline-block;
-    height: 50px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
     border: 2px solid red;
 }
