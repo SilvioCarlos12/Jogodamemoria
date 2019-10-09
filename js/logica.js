@@ -1,5 +1,5 @@
 var aleatorio;
-var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz", "sombra", "vazio"];
+var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz", "sombra", "vazio", "azul", "verde"];
 imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
@@ -38,8 +38,7 @@ for (var index = 0; index < linha; index++) {
     $(".caixa").append(`<div class='linha' id='${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        //$(`#${index}`).append(`<div class='item'><p> ${manipula[cont]} </p></div>`);
-        $(`#${index}`).append(`<div class='item'><div style='background-color:black' class='item'>  </div> </div>`);
+        $(`#${index}`).append(`<div class='item'><p class='conteudo'>${manipula[cont]} </div>`);
         cont++;
     }
 }
@@ -48,19 +47,45 @@ for (var index = 0; index < linha; index++) {
 
 
 var receb = [];
-$(".item").click(function(event) {
-    console.log($(event.target.innerHTML))
-        // receb.push(event.target.innerText);
-        // console.log(receb);
-        // if (receb.length === 2) {
-        //     if (receb[0] === receb[1]) {
-        //         console.log("acertou");
-        //     } else {
-        //         console.log("errou")
-        //     }
+var cont = 0;
+$(".item").click(function() {
+    $(this).children().css("visibility", "visible");
+    receb.push($(this).children());
+    console.log(receb);
+    if (receb.length === 2) {
+        console.log(receb);
+        if (receb[0].text() === receb[1].text()) {
+            console.log("acertou")
+            cont = 0
+            receb = [];
+        } else {
+            console.log("errou")
+            for (const iterator of receb) {
+                setTimeout(function() {
+                    iterator.css("visibility", "hidden")
+                }, 2000)
 
-    //     receb = []
-    // }
+            }
+
+            if (cont === 4) {
 
 
+                for (const iterator of receb) {
+                    setTimeout(function() {
+                        iterator.css("visibility", "hidden")
+                    }, 2000)
+
+                }
+                console.log("silvio")
+
+                cont = 0
+                receb = []
+            }
+            cont++;
+
+            receb = []
+        }
+
+
+    }
 })
