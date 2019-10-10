@@ -1,5 +1,5 @@
 var aleatorio;
-var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz", "sombra", "vazio", "azul", "verde"];
+var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz"];
 imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
@@ -38,54 +38,54 @@ for (var index = 0; index < linha; index++) {
     $(".caixa").append(`<div class='linha' id='${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        $(`#${index}`).append(`<div class='item'><p class='conteudo'>${manipula[cont]} </div>`);
+        $(`#${index}`).append(`<div class='item'><p class='conteudo'>${manipula[cont]}</p></div>`);
         cont++;
     }
 }
 
+var intervalo = window.setInterval(tempo, 1000)
+var time = 0
 
+function tempo() {
+    console.log(time++)
 
+}
 
+var acerto = 0;
 var receb = [];
-var cont = 0;
 $(".item").click(function() {
     $(this).children().css("visibility", "visible");
     receb.push($(this).children());
-    console.log(receb);
     if (receb.length === 2) {
-        console.log(receb);
         if (receb[0].text() === receb[1].text()) {
-            console.log("acertou")
+            ++acerto
             cont = 0
-            receb = [];
+            if (acerto == manipula.length / 2) {
+                clearInterval(intervalo);
+                console.log("terminei" + time)
+            }
+
         } else {
-            console.log("errou")
             for (const iterator of receb) {
                 setTimeout(function() {
                     iterator.css("visibility", "hidden")
-                }, 2000)
+                }, 500)
+                if (cont == 4) {
 
-            }
-
-            if (cont === 4) {
-
-
-                for (const iterator of receb) {
-                    setTimeout(function() {
-                        iterator.css("visibility", "hidden")
-                    }, 2000)
-
+                    window.location.reload();
                 }
-                console.log("silvio")
 
-                cont = 0
-                receb = []
             }
+
             cont++;
 
-            receb = []
         }
+
+        receb = []
 
 
     }
+
+
+
 })

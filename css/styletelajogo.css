@@ -18,3 +18,7 @@
 .conteudo {
     visibility: hidden;
 }
+
+body {
+    margin: 0px;
+}
