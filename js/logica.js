@@ -3,7 +3,13 @@ var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz"];
 imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
+var tent = document.getElementById("tentativas")
 
+
+$("#reniciar").on("click", function() {
+
+    window.location.reload();
+})
 
 
 function modal(modalid, texto) {
@@ -11,8 +17,6 @@ function modal(modalid, texto) {
     const textos = document.getElementById("trocatexto")
     textos.textContent = texto;
     modelo.classList.add('mostrar');
-
-
 
 
 }
@@ -64,8 +68,9 @@ function tempo() {
     console.log(time++)
 
 }
+
 var texto;
-var erros = 1;
+var erros = 4;
 var acerto = 0;
 var receb = [];
 $(".item").click(function() {
@@ -74,27 +79,31 @@ $(".item").click(function() {
     if (receb.length === 2) {
         if (receb[0].text() === receb[1].text()) {
             acerto++
-            erros = 0
+            erros = 4
             if (acerto == manipula.length / 2) {
                 clearInterval(intervalo);
-                texto = " ganho e seu tempo foi: " + time + " segundos ";
+                texto = "VOCÊ GANHOU NO TEMPO DE:" + time + " SEGUNDOS";
                 modal("modal-exibição", texto)
             }
 
         } else {
+            erros--;
             for (const iterator of receb) {
                 setTimeout(function() {
                     iterator.css("visibility", "hidden")
                 }, 500)
-                if (erros == 4) {
-                    modal("modal-exibição", "voce perdeu ");
+
+                if (erros == 0) {
+                    texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
+                    modal("modal-exibição", texto);
                     clearInterval(intervalo);
 
                 }
 
             }
 
-            erros++;
+
+
 
         }
 
@@ -103,6 +112,6 @@ $(".item").click(function() {
 
     }
 
-
+    tent.textContent = "NUMERO DE TENTATIVAS: " + erros
 
 })

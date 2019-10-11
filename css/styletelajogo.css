@@ -1,11 +1,21 @@
+.caixa {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 .matriz {
     display: inline-block;
     border: 2px solid black;
+    position: relative;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(138%, 50%);
 }
 
 .linha {
     width: 100%;
-    border: 2px solid blue;
+    border: 2px solid red;
 }
 
 .item {
@@ -49,6 +59,24 @@
 
 .modal-caixa.mostrar {
     display: flex;
+}
+
+.TITLE {
+    text-align: center;
+}
+
+.caixa-TITLE {
+    display: flex;
+}
+
+#sair {
+    position: relative;
+    transform: translate(20%, -110%);
+}
+
+#reniciar {
+    position: relative;
+    transform: translate(100%, -135%);
 }
 
 body {
