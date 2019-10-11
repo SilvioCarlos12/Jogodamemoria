@@ -4,6 +4,19 @@ imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
 
+
+
+function modal(modalid, texto) {
+    const modelo = document.getElementById(modalid);
+    const textos = document.getElementById("trocatexto")
+    textos.textContent = texto;
+    modelo.classList.add('mostrar');
+
+
+
+
+}
+
 function colin(numero) {
     var multipulo = []
     for (index = 2; index <= numero / 2; index++) {
@@ -19,9 +32,10 @@ while (imagem.length > 0) {
     manipula.push(imagem.splice(aleatorio, 1)[0]);
 }
 
+
+
 var divisores = colin(manipula.length);
 
-//
 if (divisores.length % 2 === 0) {
     var tam = divisores.length / 2;
     var linha = divisores[tam - 1];
@@ -35,7 +49,7 @@ if (divisores.length % 2 === 0) {
 var cont = 0
 console.log(linha, coluna);
 for (var index = 0; index < linha; index++) {
-    $(".caixa").append(`<div class='linha' id='${index}' > </div>`);
+    $(".matriz").append(`<div class='linha' id='${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
         $(`#${index}`).append(`<div class='item'><p class='conteudo'>${manipula[cont]}</p></div>`);
@@ -50,7 +64,8 @@ function tempo() {
     console.log(time++)
 
 }
-
+var texto;
+var erros = 1;
 var acerto = 0;
 var receb = [];
 $(".item").click(function() {
@@ -58,11 +73,12 @@ $(".item").click(function() {
     receb.push($(this).children());
     if (receb.length === 2) {
         if (receb[0].text() === receb[1].text()) {
-            ++acerto
-            cont = 0
+            acerto++
+            erros = 0
             if (acerto == manipula.length / 2) {
                 clearInterval(intervalo);
-                console.log("terminei" + time)
+                texto = " ganho e seu tempo foi: " + time + " segundos ";
+                modal("modal-exibição", texto)
             }
 
         } else {
@@ -70,14 +86,15 @@ $(".item").click(function() {
                 setTimeout(function() {
                     iterator.css("visibility", "hidden")
                 }, 500)
-                if (cont == 4) {
+                if (erros == 4) {
+                    modal("modal-exibição", "voce perdeu ");
+                    clearInterval(intervalo);
 
-                    window.location.reload();
                 }
 
             }
 
-            cont++;
+            erros++;
 
         }
 

@@ -1,4 +1,4 @@
-.caixa {
+.matriz {
     display: inline-block;
     border: 2px solid black;
 }
@@ -17,6 +17,38 @@
 
 .conteudo {
     visibility: hidden;
+}
+
+.modal-caixa {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.mod {
+    background-color: azure;
+    width: 45%;
+    min-width: 500px;
+    text-align: center;
+    padding: 100px;
+    border: 20px black solid;
+    position: relative;
+}
+
+#Fechar {
+    position: absolute;
+    right: 10px;
+    bottom: 4px;
+}
+
+.modal-caixa.mostrar {
+    display: flex;
 }
 
 body {
