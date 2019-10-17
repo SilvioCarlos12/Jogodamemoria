@@ -1,4 +1,4 @@
-.contenier {
+.container {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -11,11 +11,19 @@
 
 .bt {
     width: 300px;
-    height: 300px;
+    height: 395px;
     background-color: rgba(0, 183, 255, 0.849);
     text-align: center;
     font-size: 50px;
     white-space: pre-line;
+}
+
+#btn {
+    transform: translateY(-70%);
+}
+
+#btn1 {
+    transform: translateY(-50%);
 }
 
 .body {

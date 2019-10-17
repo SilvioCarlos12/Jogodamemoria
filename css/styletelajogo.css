@@ -5,12 +5,10 @@
 }
 
 .matriz {
+    margin: 0 auto;
     display: inline-block;
     border: 2px solid black;
     position: relative;
-    right: 50%;
-    bottom: 50%;
-    transform: translate(138%, 50%);
 }
 
 .linha {
@@ -77,8 +75,4 @@
 #reniciar {
     position: relative;
     transform: translate(100%, -135%);
-}
-
-body {
-    margin: 0px;
 }

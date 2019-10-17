@@ -3,14 +3,17 @@ var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz"];
 imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
+var inputs;
 var tent = document.getElementById("tentativas")
-
+$("#btn").on("click", function() {
+    localStorage.setItem("nome", document.getElementById("nome").value);
+})
+inputs = localStorage.getItem("nome");
 
 $("#reniciar").on("click", function() {
 
     window.location.reload();
 })
-
 
 function modal(modalid, texto) {
     const modelo = document.getElementById(modalid);
@@ -56,7 +59,7 @@ for (var index = 0; index < linha; index++) {
     $(".matriz").append(`<div class='linha' id='${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        $(`#${index}`).append(`<div class='item'><p class='conteudo'>${manipula[cont]}</p></div>`);
+        $(`#${index}`).append(`<div class='item' id="teste"><p class='conteudo'>${manipula[cont]}</p></div>`);
         cont++;
     }
 }
@@ -66,52 +69,54 @@ var time = 0
 
 function tempo() {
     console.log(time++)
-
 }
+var guarda = [];
 
 var texto;
 var erros = 4;
 var acerto = 0;
 var receb = [];
 $(".item").click(function() {
-    $(this).children().css("visibility", "visible");
-    receb.push($(this).children());
-    if (receb.length === 2) {
-        if (receb[0].text() === receb[1].text()) {
-            acerto++
-            erros = 4
-            if (acerto == manipula.length / 2) {
-                clearInterval(intervalo);
-                texto = "VOCÊ GANHOU NO TEMPO DE:" + time + " SEGUNDOS";
-                modal("modal-exibição", texto)
-            }
 
-        } else {
-            erros--;
-            for (const iterator of receb) {
-                setTimeout(function() {
-                    iterator.css("visibility", "hidden")
-                }, 500)
+        $(this).children().css("visibility", "visible");
 
-                if (erros == 0) {
-                    texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
-                    modal("modal-exibição", texto);
+        receb.push($(this).children());
+        if (receb.length === 2) {
+            if (receb[0].text() === receb[1].text()) {
+                acerto++
+                erros = 4
+
+                if (acerto == manipula.length / 2) {
                     clearInterval(intervalo);
+                    texto = "VOCÊ GANHOU NO TEMPO DE: " + time + " SEGUNDOS ";
+                    modal("modal-exibição", texto)
+                    localStorage.setItem(inputs, time);
+                }
 
+
+            } else {
+
+                erros--;
+
+                for (const iterator of receb) {
+                    setTimeout(function() {
+                        iterator.css("visibility", "hidden")
+                    }, 500)
                 }
 
             }
 
+            if (erros == 0) {
+                texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
+                modal("modal-exibição", texto);
+                clearInterval(intervalo);
+
+            }
 
 
-
+            receb = []
         }
-
-        receb = []
-
-
     }
 
-    tent.textContent = "NUMERO DE TENTATIVAS: " + erros
 
-})
+)
