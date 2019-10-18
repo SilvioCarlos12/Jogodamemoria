@@ -7,10 +7,12 @@ var inputs;
 var tent = document.getElementById("tentativas")
 $("#btn").on("click", function() {
     localStorage.setItem("nome", $("#NOME").val())
-    if (localStorage.getItem("nome") === "") {
+    if (localStorage.getItem("nome", $("#NOME").val()) === "") {
         localStorage.removeItem("nome")
     } else {
+        localStorage.setItem("nome", $("#NOME").val())
         window.open("/telas/telajogo.html", "_self")
+
     };
 
 })
@@ -67,7 +69,7 @@ for (var index = 0; index < linha; index++) {
     $(".matriz").append(`<div class='linha' id='l${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        $(`#l${index}`).append(`<div class='item' id="${cont}"><p class='conteudo'>${manipula[cont]}</p></div>`);
+        $(`#l${index}`).append(`<div class='item'><p class='conteudo' id="c${cont}">${manipula[cont]}</p></div>`);
         cont++;
     }
 }
@@ -87,47 +89,54 @@ var receb = [];
 $(".item").click(function() {
 
         $(this).children().css("visibility", "visible");
-
         receb.push($(this).children());
+        console.log(receb);
         if (receb.length === 2) {
-            if (receb[0].text() === receb[1].text()) {
-                acerto++
-                erros = 4
+            if (receb[0][0].id !== receb[1][0].id) {
+                if (receb[0].text() === receb[1].text()) {
 
-                if (acerto == manipula.length / 2) {
+                    acerto++
+                    erros = 4
+
+                    if (acerto == manipula.length / 2) {
+                        clearInterval(intervalo);
+                        texto = "VOCÊ GANHOU NO TEMPO DE: " + time + " SEGUNDOS ";
+                        modal("modal-exibição", texto)
+                        inputs = localStorage.getItem("nome");
+                        localStorage.setItem(inputs, time);
+                    }
+
+
+                } else {
+
+                    erros--;
+
+                    for (const iterator of receb) {
+                        setTimeout(function() {
+                            iterator.css("visibility", "hidden")
+                        }, 500)
+                    }
+
+                }
+
+                if (erros == 0) {
+                    texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
+                    modal("modal-exibição", texto);
+                    localStorage.removeItem("nome")
                     clearInterval(intervalo);
-                    texto = "VOCÊ GANHOU NO TEMPO DE: " + time + " SEGUNDOS ";
-                    modal("modal-exibição", texto)
-                    inputs = localStorage.getItem("nome");
 
-                    localStorage.setItem(inputs, time);
                 }
-
-
+                receb = []
             } else {
-
-                erros--;
-
-                for (const iterator of receb) {
-                    setTimeout(function() {
-                        iterator.css("visibility", "hidden")
-                    }, 500)
-                }
-
+                receb.pop();
             }
-
-            if (erros == 0) {
-                texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
-                modal("modal-exibição", texto);
-                localStorage.removeItem("nome")
-                clearInterval(intervalo);
-
-            }
-
-
-            receb = []
         }
+
+
+
     }
+
+
 
 
 )
