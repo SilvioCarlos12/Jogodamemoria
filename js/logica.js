@@ -6,9 +6,17 @@ var linha = [];
 var inputs;
 var tent = document.getElementById("tentativas")
 $("#btn").on("click", function() {
-    localStorage.setItem("nome", document.getElementById("nome").value);
+    localStorage.setItem("nome", $("#NOME").val())
+    if (localStorage.getItem("nome") === "") {
+        localStorage.removeItem("nome")
+    } else {
+        window.open("/telas/telajogo.html", "_self")
+    };
+
 })
-inputs = localStorage.getItem("nome");
+
+
+
 
 $("#reniciar").on("click", function() {
 
@@ -56,10 +64,10 @@ if (divisores.length % 2 === 0) {
 var cont = 0
 console.log(linha, coluna);
 for (var index = 0; index < linha; index++) {
-    $(".matriz").append(`<div class='linha' id='${index}' > </div>`);
+    $(".matriz").append(`<div class='linha' id='l${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        $(`#${index}`).append(`<div class='item' id="teste"><p class='conteudo'>${manipula[cont]}</p></div>`);
+        $(`#l${index}`).append(`<div class='item' id="${cont}"><p class='conteudo'>${manipula[cont]}</p></div>`);
         cont++;
     }
 }
@@ -90,6 +98,8 @@ $(".item").click(function() {
                     clearInterval(intervalo);
                     texto = "VOCÊ GANHOU NO TEMPO DE: " + time + " SEGUNDOS ";
                     modal("modal-exibição", texto)
+                    inputs = localStorage.getItem("nome");
+
                     localStorage.setItem(inputs, time);
                 }
 
@@ -109,6 +119,7 @@ $(".item").click(function() {
             if (erros == 0) {
                 texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
                 modal("modal-exibição", texto);
+                localStorage.removeItem("nome")
                 clearInterval(intervalo);
 
             }

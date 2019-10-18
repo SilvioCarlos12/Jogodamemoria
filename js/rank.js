@@ -6,11 +6,18 @@ for (let index = 0; index < localStorage.length; index++) {
     });
 
 }
+
 var ordenado = guarda.sort(function(a, b) {
-    if (a.valor > b.valor) {
-        return 1
+    let c = parseInt(a.valor)
+    let d = parseInt(b.valor)
+    console.log(c, d)
+    if (c < d) {
+        return -1
+
+
     }
 })
-for (let index = 0; index < guarda.length; index++) {
+console.log(ordenado)
+for (let index = 0; index < 4; index++) {
     $(".rank").append(`<div class="" id=${index}>${ordenado[index]["nome"]+":"+ordenado[index]["valor"]}</div>`)
 }
