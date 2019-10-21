@@ -1,9 +1,8 @@
 var aleatorio;
-var imagem = ["agua", "fogo", "vento", "terra", "trovao", "luz"];
+var imagem = ["agua", "fogo", "ar", "terra", "trovao", "luz"];
 imagem = imagem.concat(imagem);
 var manipula = [];
 var linha = [];
-var inputs;
 var tent = document.getElementById("tentativas")
 $("#btn").on("click", function() {
     localStorage.setItem("nome", $("#NOME").val())
@@ -20,13 +19,13 @@ $("#btn").on("click", function() {
 
 
 
-$("#reniciar").on("click", function() {
+$("#btnreniciar").on("click", function() {
 
     window.location.reload();
 })
 
-function modal(modalid, texto) {
-    const modelo = document.getElementById(modalid);
+function mostramodal(modal_id, texto) {
+    const modelo = document.getElementById(modal_id);
     const textos = document.getElementById("trocatexto")
     textos.textContent = texto;
     modelo.classList.add('mostrar');
@@ -34,7 +33,7 @@ function modal(modalid, texto) {
 
 }
 
-function colin(numero) {
+function mult(numero) {
     var multipulo = []
     for (index = 2; index <= numero / 2; index++) {
         if (numero % index === 0) {
@@ -51,7 +50,7 @@ while (imagem.length > 0) {
 
 
 
-var divisores = colin(manipula.length);
+var divisores = mult(manipula.length);
 
 if (divisores.length % 2 === 0) {
     var tam = divisores.length / 2;
@@ -69,7 +68,7 @@ for (var index = 0; index < linha; index++) {
     $(".matriz").append(`<div class='linha' id='l${index}' > </div>`);
     console.log($(".linha"));
     for (var index2 = 0; index2 < coluna; index2++) {
-        $(`#l${index}`).append(`<div class='item'><p class='conteudo' id="c${cont}">${manipula[cont]}</p></div>`);
+        $(`#l${index}`).append(`<div class='item'><img class='conteudo' id="c${cont}" src= '/img/${manipula[cont]}.jpg'/</div>`);
         cont++;
     }
 }
@@ -80,7 +79,6 @@ var time = 0
 function tempo() {
     console.log(time++)
 }
-var guarda = [];
 
 var texto;
 var erros = 4;
@@ -93,7 +91,7 @@ $(".item").click(function() {
         console.log(receb);
         if (receb.length === 2) {
             if (receb[0][0].id !== receb[1][0].id) {
-                if (receb[0].text() === receb[1].text()) {
+                if (receb[0][0].src === receb[1][0].src) {
 
                     acerto++
                     erros = 4
@@ -101,7 +99,7 @@ $(".item").click(function() {
                     if (acerto == manipula.length / 2) {
                         clearInterval(intervalo);
                         texto = "VOCÊ GANHOU NO TEMPO DE: " + time + " SEGUNDOS ";
-                        modal("modal-exibição", texto)
+                        mostramodal("modal-exibição", texto)
                         inputs = localStorage.getItem("nome");
                         localStorage.setItem(inputs, time);
                     }
@@ -121,15 +119,16 @@ $(".item").click(function() {
 
                 if (erros == 0) {
                     texto = "VOCÊ PERDEU NO TEMPO DE: " + time + " SEGUNDOS";
-                    modal("modal-exibição", texto);
+                    mostramodal("modal-exibição", texto);
                     localStorage.removeItem("nome")
                     clearInterval(intervalo);
 
                 }
-                receb = []
+
             } else {
                 receb.pop();
             }
+            receb = []
         }
 
 

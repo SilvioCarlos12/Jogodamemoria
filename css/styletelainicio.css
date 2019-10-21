@@ -1,12 +1,11 @@
 .container {
     height: 100vh;
-    width: 100vw;
+    width: 300vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
-    background-color: rgba(0, 255, 128, 0.479);
 }
 
 .bt {
@@ -18,14 +17,11 @@
     white-space: pre-line;
 }
 
-#btn {
-    transform: translateY(-70%);
-}
-
-#btn1 {
-    transform: translateY(-50%);
+#input-btns {
+    transform: translate(70%, 100%);
 }
 
 .body {
     margin: 0px;
+    background-color: rgba(0, 255, 128, 0.479);
 }

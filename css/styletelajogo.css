@@ -25,6 +25,10 @@
 
 .conteudo {
     visibility: hidden;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 97px;
+    height: 97px;
 }
 
 .modal-caixa {
@@ -65,14 +69,4 @@
 
 .caixa-TITLE {
     display: flex;
-}
-
-#sair {
-    position: relative;
-    transform: translate(20%, -110%);
-}
-
-#reniciar {
-    position: relative;
-    transform: translate(100%, -135%);
 }
